@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="WorkMate.Views.UnitStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:WorkMate.Views"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+                        <Setter Property="Foreground" Value="DimGray"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+
+                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                        <Setter Property="Foreground" Value="DarkSlateGray"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="IsReadOnly" Value="True"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="MinWidth" Value="50"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Text="Process"/>
+                <ComboBox Name="cbxProcess"                   
+                          Width="120" Margin="5" 
+                          DisplayMemberPath="Value.iValue" SelectedValuePath="Key" SelectedIndex="0"
+                          HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+                <TextBlock Text="Side"/>
+                <ComboBox Name="cbxSide" 
+                          Width="100" Margin="5" 
+                          DisplayMemberPath="Value.iValue" SelectedValuePath="Key" SelectedIndex="0"
+                          HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            </StackPanel>
+           
+            <Button Content="Search" Grid.Column="1" 
+                    FontWeight="Bold" 
+                    HorizontalAlignment="Right"                
+                    Width="120" Margin="5"
+                    Click="SearchButton_OnClick"/>
+        </Grid>
+
+        <DataGrid Name="dgv" 
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  SelectionMode="Extended" CanUserAddRows="False" CanUserResizeColumns="True"
+                  md:DataGridAssist.ColumnHeaderPadding="3"
+                  md:DataGridAssist.CellPadding="3"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  MouseDoubleClick="ShowUnitHistory_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Process" MinWidth="80" Binding="{Binding Process, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <DataGridTextColumn Header="Side" MinWidth="80" Binding="{Binding Side, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <DataGridTextColumn Header="Unit" MinWidth="80" Binding="{Binding Unit, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <DataGridTextColumn Header="Invest No" MinWidth="80" Binding="{Binding InvestNo, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <DataGridTextColumn Header="PO Status" MinWidth="80" Binding="{Binding POStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <DataGridTextColumn Header="Installation" MinWidth="100" Binding="{Binding Installation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}"/>
+                <DataGridTextColumn Header="RTSO" MinWidth="80" Binding="{Binding IsRTSO, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="Power" MinWidth="80" Binding="{Binding IsPower, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="YTSO" MinWidth="80" Binding="{Binding IsYTSO, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="Setup(단동)" MinWidth="120" Binding="{Binding SetupSingle, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="Setup(연동)" MinWidth="120" Binding="{Binding SetupIntegrated, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="정합성" MinWidth="120" Binding="{Binding Consistency, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="Memo" Width="*" Binding="{Binding Memo, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="양산" MinWidth="100" Binding="{Binding ProductNote, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="Update Date" MinWidth="80" Binding="{Binding UpdateDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, StringFormat=MM/dd/yyyy}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

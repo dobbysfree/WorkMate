@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="WorkMate.Views.DailyTaskView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:WorkMate.Views">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <DatePicker Name="dtPicker"
+                        Width="150"                         
+                        HorizontalAlignment="Left"
+                        HorizontalContentAlignment="Stretch"
+                        mah:TextBoxHelper.ClearTextButton="True"
+                        mah:TextBoxHelper.UseFloatingWatermark="True"
+                        mah:TextBoxHelper.Watermark="Please select a date"
+                        mah:TextBoxHelper.WatermarkAlignment="Right">
+            </DatePicker>
+
+            <Button Content="Search" 
+                    FontWeight="Bold"
+                    HorizontalAlignment="Right"
+                    Width="120" Margin="10"
+                    Click="SearchButton_OnClick"/>
+        </Grid>
+
+        <DataGrid Name="dgv"
+                  Grid.Row="1" Margin="5"
+                  RowEditEnding="RowEditEndingEvent" BeginningEdit="RowEditBeginEvent"
+                  SelectionMode="Single" CanUserResizeColumns="True" AutoGenerateColumns="False" CanUserAddRows="False"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <!--<DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="ADD" Icon="{md:PackIcon Kind=Add}" Click="AddClickEvent"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>-->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" MinWidth="80" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, StringFormat=MM/dd/yyyy}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="Day" MinWidth="20" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, StringFormat=ddd}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource LeftCell}" />
+                <DataGridTextColumn Header="User" MinWidth="80" Binding="{Binding UserID, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <DataGridTemplateColumn Header="Start" MinWidth="80" MaxWidth="80" HeaderStyle="{StaticResource HeaderBold}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding StartTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DgTbEditCell}" HorizontalContentAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="End" MinWidth="80" MaxWidth="80" HeaderStyle="{StaticResource HeaderBold}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding EndTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DgTbEditCell}" HorizontalContentAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Area" FontSize="13" MinWidth="80" MaxWidth="80" Binding="{Binding Area, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <DataGridTemplateColumn Header="Note" Width="2*" HeaderStyle="{StaticResource HeaderBold}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Note, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DgTbEditCell}" HorizontalContentAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Info" Width="1.4*" HeaderStyle="{StaticResource HeaderBold}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Info, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DgTbEditCell}" HorizontalContentAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

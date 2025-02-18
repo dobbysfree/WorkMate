@@ -1,0 +1,83 @@
+﻿<Controls:MetroWindow x:Class="WorkMate.Views.UnitHistoryView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+                      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:local="clr-namespace:WorkMate.Views"
+                      WindowStartupLocation="CenterScreen"
+                      mc:Ignorable="d" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <WrapPanel x:Name="UnitHeader" >
+                <WrapPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+                        <Setter Property="Foreground" Value="DimGray"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+
+                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                        <Setter Property="Foreground" Value="DarkSlateGray"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="IsReadOnly" Value="True"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="MinWidth" Value="50"/>
+                    </Style>
+                </WrapPanel.Resources>
+                <TextBlock Text="UNIT History" Margin="5,5,10,5" FontSize="15" FontWeight="Bold" Foreground="BlueViolet"/>
+
+                <TextBlock Text="Process"/>
+                <TextBox Text="{Binding Process, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
+                <TextBlock Text="Side"/>
+                <TextBox Text="{Binding Side, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
+                <TextBlock Text="Unit"/>
+                <TextBox Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+            </WrapPanel>
+
+            <Button Content="Search" 
+                    FontWeight="Bold"
+                    HorizontalAlignment="Right"
+                    Width="100" Margin="5"
+                    Click="SearchButton_OnClick"/>
+        </Grid>
+
+        <DataGrid Name="dgv"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  SelectionMode="Extended" CanUserAddRows="False" CanUserResizeColumns="True"
+                  md:DataGridAssist.ColumnHeaderPadding="3"
+                  md:DataGridAssist.CellPadding="3"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  RowEditEnding="RowEditEndingEvent" BeginningEdit="RowEditBeginEvent">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="ADD" Icon="{md:PackIcon Kind=Add}" Click="AddClickEvent"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <md:DataGridTextColumn Header="DateTime" MinWidth="80" Binding="{Binding CreateDT, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, StringFormat=MM/dd/yyyy HH:mm}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <md:DataGridTextColumn Header="Task" MinWidth="80" Binding="{Binding Task, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <md:DataGridTextColumn Header="Note" Width="*" Binding="{Binding Note, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <md:DataGridTextColumn Header="Ref.Issue" MinWidth="80" Binding="{Binding TicketNo, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Controls:MetroWindow>
