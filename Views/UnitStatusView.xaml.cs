@@ -23,8 +23,6 @@ namespace WorkMate.Views
 
             cbxProcess.ItemsSource  = MainView.DicKeyValues.Where(x => x.Value.iKey == "" || x.Value.iKey == "Process_Code");
             cbxSide.ItemsSource     = MainView.DicKeyValues.Where(x => x.Value.iKey == "" || x.Value.iKey == "Side_Type");
-
-            ParsingDBData();
         }
 
         private void SearchButton_OnClick(object sender, RoutedEventArgs e)
@@ -56,22 +54,22 @@ namespace WorkMate.Views
                 {
                     var row = dt.Rows[i].ItemArray;
                     UnitStatuses.Add(new UnitStatus {
-                        UnitNo          = (short)row[0],
-                        ProcessCode     = (ushort)row[1],
-                        SideType        = (ushort)row[2],
-                        Unit            = (string)row[3],
-                        InvestNo        = (int)row[4],
-                        ProcessLine     = (ushort)row[5],
-                        Installation    = (string)row[6],
-                        IsRTSO          = (string)row[7],
-                        IsPower         = (string)row[8],
-                        IsYTSO          = (string)row[9],
-                        SetupSingle     = (string)row[10],
-                        SetupIntegrated = (string)row[11],
-                        Consistency     = (string)row[12],
-                        Memo            = (string)row[13],
-                        ProductNote     = (string)row[14],
-                        UpdateDate      = (DateTime)row[15]
+                        //UnitNo          = (ushort)row[0],
+                        ProcessCode     = (ushort)row[0],
+                        SideType        = (ushort)row[1],
+                        Unit            = (string)row[2],
+                        InvestNo        = (int)row[3],
+                        ProcessLine     = (ushort)row[4],
+                        Installation    = (string)row[5],
+                        IsRTSO          = (string)row[6],
+                        IsPower         = (string)row[7],
+                        IsYTSO          = (string)row[8],
+                        SetupSingle     = (string)row[9],
+                        SetupIntegrated = (string)row[10],
+                        Consistency     = (string)row[11],
+                        Memo            = (string)row[12],
+                        ProductNote     = (string)row[13],
+                        UpdateDate      = (DateTime)row[14]
                     });                    
                 }
 

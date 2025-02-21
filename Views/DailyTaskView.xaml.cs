@@ -95,8 +95,6 @@ namespace WorkMate.Views
             }
         }
 
-
-
         private void RowEditBeginEvent(object sender, DataGridBeginningEditEventArgs e)
         {
             if (e != null)

@@ -9,7 +9,7 @@ namespace WorkMate.Models
         public UnitStatus backupCopy;
         private bool inEdit;
 
-        public short UnitNo { get; set; }
+        //public ushort UnitNo { get; set; }
 
 
         ushort _ProcessCode;
@@ -228,7 +228,7 @@ namespace WorkMate.Models
             if (!inEdit)
             {
                 backupCopy = new UnitStatus { 
-                    UnitNo          = this.UnitNo,
+                    //UnitNo          = this.UnitNo,
                     ProcessCode     = this.ProcessCode,
                     SideType        = this.SideType,
                     Unit            = this.Unit,
@@ -252,7 +252,7 @@ namespace WorkMate.Models
         {
             if (inEdit)
             {
-                this.UnitNo         = backupCopy.UnitNo;
+                //this.UnitNo         = backupCopy.UnitNo;
                 this.ProcessCode    = backupCopy.ProcessCode;
                 this.SideType       = backupCopy.SideType;
                 this.Unit           = backupCopy.Unit;

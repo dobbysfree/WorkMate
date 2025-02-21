@@ -61,7 +61,7 @@
         <DataGrid Name="dgv"
                   Grid.Row="1"
                   AutoGenerateColumns="False"
-                  SelectionMode="Extended" CanUserAddRows="False" CanUserResizeColumns="True"
+                  SelectionMode="Single" CanUserAddRows="False" CanUserResizeColumns="True"
                   md:DataGridAssist.ColumnHeaderPadding="3"
                   md:DataGridAssist.CellPadding="3"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -72,11 +72,19 @@
                     <MenuItem Header="ADD" Icon="{md:PackIcon Kind=Add}" Click="AddClickEvent"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
-            <DataGrid.Columns>
+            <DataGrid.Columns>                
                 <md:DataGridTextColumn Header="DateTime" MinWidth="80" Binding="{Binding CreateDT, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, StringFormat=MM/dd/yyyy HH:mm}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
-                <md:DataGridTextColumn Header="Task" MinWidth="80" Binding="{Binding Task, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
-                <md:DataGridTextColumn Header="Note" Width="*" Binding="{Binding Note, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
-                <md:DataGridTextColumn Header="Ref.Issue" MinWidth="80" Binding="{Binding TicketNo, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <md:DataGridComboBoxColumn Header="Task" MinWidth="80" HeaderStyle="{StaticResource HeaderBold}"
+                                           ItemsSource="{Binding TaskTypes%}" DisplayMemberPath="Value.iValue" SelectedValuePath="Key"
+                                           SelectedValueBinding="{Binding Task, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                    
+                </md:DataGridComboBoxColumn>
+                <!--<ComboBox Name="cbxCompany" Margin="5" Width="200"
+           DisplayMemberPath="Value.iValue" SelectedValuePath="Key" SelectedIndex="0"
+           HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>-->
+                <!--<md:DataGridTextColumn Header="Task" MinWidth="80" Binding="{Binding Task, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />-->
+                <md:DataGridTextColumn Header="Note" Width="*" Binding="{Binding Note, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
+                <md:DataGridTextColumn Header="Ref.Issue" MinWidth="80" Binding="{Binding TicketNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HeaderStyle="{StaticResource HeaderBold}" ElementStyle="{StaticResource CenterCell}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

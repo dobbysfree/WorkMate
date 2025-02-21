@@ -13,7 +13,11 @@ namespace WorkMate.Models
         //public int UnitNo { get; set; }
 
         ushort _TaskType;
-        public string Task { get => MainView.DicKeyValues[TaskType].iValue; }
+        //public string Task 
+        //{ 
+        //    get => MainView.DicKeyValues[TaskType].iValue;
+        //}
+
         public ushort TaskType
         {
             get => _TaskType;

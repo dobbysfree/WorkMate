@@ -15,6 +15,7 @@ namespace WorkMate.Views
     {
         public static Account User { get; set; } = new Account();
         public static Dictionary<ushort, DicEnum> DicKeyValues { get; set; }
+        public static List<Unit> Units { get; set; } 
         
         public MainView()
         {
@@ -23,6 +24,7 @@ namespace WorkMate.Views
             if (!rst) Close();
 
             GetTypeEnumsFromDB();
+            GetUnitListFromDB();
 
             Title = $"[{User.Team}] {User.FirstName}";
             StatusTitle.Content = $"{User.Area} {User.Role} Support Application";
@@ -52,6 +54,31 @@ namespace WorkMate.Views
                 {
                     var row = dt.Rows[i].ItemArray;
                     DicKeyValues[(ushort)row[0]] = new DicEnum { iKey = (string)row[1], iValue = (string)row[2] };
+                }
+            }
+            catch (Exception ex)
+            {
+                App.ILog.Error(ex.ToString());
+            }
+        }
+
+        void GetUnitListFromDB()
+        {
+            Units = new List<Unit>();
+            try
+            {
+                var query = $"SELECT Process_Code, Side_Type, Unit FROM tb_unit_status;";
+                var dt = DB.SelectSingle(query);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    var row = dt.Rows[i].ItemArray;
+                    Units.Add(new Unit { 
+                        //UnitNo      = (ushort)row[0],
+                        ProcessCode = (ushort)row[0],
+                        SideType    = (ushort)row[1],
+                        UnitName    = (string)row[2]
+                    });                    
                 }
             }
             catch (Exception ex)
