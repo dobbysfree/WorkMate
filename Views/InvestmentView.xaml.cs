@@ -49,9 +49,10 @@ namespace WorkMate.Views
                         Margin      = (string)row[6],
                         ProcessLine = (string)row[7],
                         PONo        = (string)row[8],
-                        Status      = (short)row[9],
-                        UpdateDate  = (DateTime)row[10],
-                        Note        = (string)row[11]
+                        Status      = (ushort)row[9],
+                        TaskType    = (ushort)row[10],
+                        UpdateDate  = (DateTime)row[11],
+                        Note        = (string)row[12]
                     });
                 }
 

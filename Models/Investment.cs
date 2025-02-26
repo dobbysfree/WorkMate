@@ -63,11 +63,18 @@ namespace WorkMate.Models
             set { _PONo = value; OnPropertyChanged("PONo"); }
         }
 
-        short _Status;
-        public short Status
+        ushort _Status;
+        public ushort Status
         {
             get { return _Status; }
             set { _Status = value; OnPropertyChanged("Status"); }
+        }
+
+        ushort _TaskType;
+        public ushort TaskType
+        {
+            get { return _TaskType; }
+            set { _TaskType = value; OnPropertyChanged("TaskType"); }
         }
 
         DateTime _UpdateDate;
