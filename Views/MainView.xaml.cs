@@ -117,6 +117,7 @@ namespace WorkMate.Views
                 User.LastName   = (string)row[8];
                 User.JoinDate   = (DateTime)row[9];
                 User.LeaveDate  = (string)row[10];
+                User.Level      = (ushort)row[11];
             }
             catch (Exception ex)
             {

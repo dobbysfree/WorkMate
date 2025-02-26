@@ -19,6 +19,7 @@ namespace WorkMate.Models
         public string PW { get; set; }
         public DateTime JoinDate { get; set; }
         public string LeaveDate { get; set; }
+        public ushort Level { get; set; }
 
         #region INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
