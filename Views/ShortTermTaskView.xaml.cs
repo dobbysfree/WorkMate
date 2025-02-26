@@ -128,7 +128,7 @@ namespace WorkMate.Views
                 query.Append("UPDATE tb_daily_task SET ");
                 query.Append($"Note='{daily.Note}' ");
                 query.Append($"WHERE Date='{date.ToString("yyyy-MM-dd")}' ");
-                query.Append($"AND User_ID='{MainView.User.UserID}'");
+                query.Append($"AND Employee_No='{MainView.User.EmployeeNo}'");
                 DB.Execute(query.ToString());
             }
         }
