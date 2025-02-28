@@ -28,6 +28,7 @@ namespace WorkMate.Views
             cbxTask.ItemsSource     = MainView.DicKeyValues.Where(x => x.Value.iKey == LogTag.Empty || x.Value.iKey == LogTag.Task_Type);
 
             ParsingDBData();
+            DataContext = this;
             ListCountChanged?.Invoke();
         }
 
@@ -87,6 +88,8 @@ namespace WorkMate.Views
                 }
 
                 dgv.ItemsSource = IssueTickets;
+                
+                //MixCnt = IssueTickets.Count(x => x.ProcessCode == 40);
             }
             catch (Exception ex)
             {
@@ -96,10 +99,10 @@ namespace WorkMate.Views
 
         #region INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName = null)
+
+        protected void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 

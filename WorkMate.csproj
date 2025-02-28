@@ -313,6 +313,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\IssueStatusConverter.cs" />
+    <Compile Include="Converters\TaskTypeConverter.cs" />
+    <Compile Include="Converters\ProcessCodeConverter.cs" />
     <Compile Include="Feature\DateTimeToStringConverter.cs" />
     <Compile Include="Feature\LogTag.cs" />
     <Compile Include="Feature\WeeklyReporting.cs" />
